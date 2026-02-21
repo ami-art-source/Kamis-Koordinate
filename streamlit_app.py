@@ -1,3 +1,4 @@
+
 import streamlit as st
 import random
 import math
@@ -117,7 +118,7 @@ body {
 st.title("🔮 Kamis-Koordinate Generator")
 
 # Eingabe
-n = st.number_input("Anzahl der Koordinaten", min_value=1, max_value=5000, value=5)
+n = st.number_input("Anzahl der Koordinaten", min_value=1, max_value=1000000, value=5)
 
 if st.button("Koordinaten generieren"):
     coords = generate_multiple_coordinates(n)
