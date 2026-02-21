@@ -114,7 +114,7 @@ body {
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🔮 Kamis-Koordinate")
+st.title("🔮 Koordinaten‑Generator (Hexagon, Dark Mode)")
 
 # Eingabe
 n = st.number_input("Anzahl der Koordinaten", min_value=1, max_value=5000, value=5)
@@ -156,6 +156,21 @@ if st.button("Koordinaten generieren"):
                 k, x, y = c
                 rows.append([i, format_x_as_k_sqrt3(k), y])
         st.table(rows)
+
+    # ---------------------------------------------------------
+    # Gruppiert
+    # ---------------------------------------------------------
+    with tab3:
+        st.subheader("Gültige Koordinaten")
+        for i, c in enumerate(coords, start=1):
+            if c is not None:
+                k, x, y = c
+                st.write(f"- {i}: ({format_x_as_k_sqrt3(k)}, {y})")
+
+        st.subheader("Keine Koordinate")
+        for i, c in enumerate(coords, start=1):
+            if c is None:
+                st.write(f"- {i}")
 
     # ---------------------------------------------------------
     # Blöcke
