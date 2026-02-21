@@ -114,7 +114,7 @@ body {
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🔮 Koordinaten‑Generator (Hexagon, Dark Mode)")
+st.title("🔮 Kamis-Koordinate Generator")
 
 # Eingabe
 n = st.number_input("Anzahl der Koordinaten", min_value=1, max_value=5000, value=5)
