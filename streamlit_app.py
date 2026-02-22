@@ -47,12 +47,8 @@ def weight_function(x, y):
 # Koordinaten-Generator
 # ---------------------------------------------------------
 
-def generate_single_coordinate():
-    # Sonderregel: (0,0) mit 1/200000 Chance
-    if random.random() < 1/200000:
-        return (0, 0, 0)
 
-    # 80% Chance für None
+def generate_single_coordinate():
     if random.random() < 0.8:
         return None
 
@@ -78,7 +74,7 @@ def generate_single_coordinate():
             if not sqrt3_is_odd and y_is_odd:
                 continue
 
-            # Point‑Top‑Hexagon‑Regel
+            # Point-top Hexagon Regel
             if abs(y) > 20 - abs(k):
                 continue
 
@@ -93,6 +89,9 @@ def generate_single_coordinate():
         cumulative += w
         if cumulative >= r:
             return (k, x, y)
+
+def generate_multiple_coordinates(n):
+    return [generate_single_coordinate() for _ in range(n)]
 
 # ---------------------------------------------------------
 # Streamlit UI (Dark Mode)
