@@ -55,7 +55,7 @@ def generate_single_coordinate():
     if random.random() < 0.8:
         return None
 
-    possible_k = list(range(-12, 13))
+    possible_k = list(range(-10, 11))
     x_candidates = [x_from_units(k) for k in possible_k]
     valid_kx = [(k, x) for k, x in zip(possible_k, x_candidates) if -20 <= x <= 20]
 
