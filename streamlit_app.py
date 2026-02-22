@@ -48,12 +48,12 @@ def weight_function(x, y):
 # ---------------------------------------------------------
 
 def generate_single_coordinate():
-    # Sonderregel: (0,0) mit 1/2000000 Chance
-    if random.random() < 1/2000000:
+    # Sonderregel: (0,0) mit 1/200000 Chance
+    if random.random() < 1/200000:
         return (0, 0, 0)
 
     # 80% Chance für None
-    if random.random() < 0.0:
+    if random.random() < 0.8:
         return None
 
     possible_k = list(range(-12, 13))
@@ -78,6 +78,7 @@ def generate_single_coordinate():
             if not sqrt3_is_odd and y_is_odd:
                 continue
 
+            # Point‑Top‑Hexagon‑Regel
             if abs(y) > 20 - abs(k):
                 continue
 
