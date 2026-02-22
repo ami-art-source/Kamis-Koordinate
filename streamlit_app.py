@@ -49,6 +49,9 @@ def weight_function(x, y):
 
 
 def generate_single_coordinate():
+    if random.random() < 1/2000000:
+        return (0, 0, 0)
+
     if random.random() < 0.8:
         return None
 
