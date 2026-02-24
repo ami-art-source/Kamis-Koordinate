@@ -6,11 +6,11 @@ import streamlit as st
 # Dynamisches Farbschema
 # -----------------------------
 THEMES = [
-    {"bg": "#f3e8ff", "accent": "#9d4edd", "text": "#2b0b3f"},
-    {"bg": "#e0f7fa", "accent": "#00838f", "text": "#00363a"},
-    {"bg": "#fff3e0", "accent": "#fb8c00", "text": "#4a2c00"},
-    {"bg": "#fce4ec", "accent": "#d81b60", "text": "#4a001f"},
-    {"bg": "#e8f5e9", "accent": "#43a047", "text": "#0b3014"},
+    {"bg": "#16007a", "accent": "#9d4edd", "text": "#2b0b3f"},
+    {"bg": "#45007a", "accent": "#00838f", "text": "#00363a"},
+    {"bg": "#5e007a", "accent": "#fb8c00", "text": "#4a2c00"},
+    {"bg": "#7a007a", "accent": "#d81b60", "text": "#4a001f"},
+    {"bg": "#7a0045", "accent": "#43a047", "text": "#0b3014"},
 ]
 theme = random.choice(THEMES)
 
