@@ -347,13 +347,13 @@ COLOR_VALUES = {
     "Rubin": 1,
     "Carnelian": 2,
     "Bernstein": 3,
-    "Citrin": 5,
-    "Peridot": 6,
-    "Smaragd": 7,
-    "Aquamarin": 8,
-    "Saphir": 9,
-    "Amethyst": 10,
-    "Rhodolith": 11,
+    "Citrin":4,
+    "Peridot": 5,
+    "Smaragd": 6,
+    "Aquamarin": 7,
+    "Saphir": 8,
+    "Amethyst": 9,
+    "Rhodolith": 10,
     "Selenit": 13
 }
 
