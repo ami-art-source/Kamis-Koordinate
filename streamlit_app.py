@@ -339,210 +339,32 @@ def build_hexagon_svg(results, points, width=700, height=750):
     svg.append("</svg>")
     return "\n".join(svg)
 
-# ---------------------------------------------------------
-# TAB 3: Formel‑Rechner (komplett neu integriert)
-# ---------------------------------------------------------
+# -----------------------------
+# Formel-Rechner
+# -----------------------------
 
-# ---------------------------------------------------------
-# Klassenwerte (12 Stats → Prozent)
-# ---------------------------------------------------------
-CLASS_STATS = {
-    "Alchemy": {
-        "HP": 40, "MP": 70, "STR": 30, "DEF": 45,
-        "INT": 90, "RES": 65, "AGI": 40, "CRIT": 35,
-        "MOV": 45, "JUMP": 20, "THROW": 60, "RANGE": 60
-    },
-    "Forging": {
-        "HP": 60, "MP": 30, "STR": 70, "DEF": 55,
-        "INT": 10, "RES": 35, "AGI": 60, "CRIT": 65,
-        "MOV": 55, "JUMP": 80, "THROW": 40, "RANGE": 40
-    },
-    "Tempering": {
-        "HP": 85, "MP": 20, "STR": 90, "DEF": 80,
-        "INT": 15, "RES": 70, "AGI": 50, "CRIT": 15,
-        "MOV": 60, "JUMP": 50, "THROW": 40, "RANGE": 25
-    },
-    "Sorcery": {
-        "HP": 15, "MP": 80, "STR": 10, "DEF": 20,
-        "INT": 85, "RES": 30, "AGI": 50, "CRIT": 85,
-        "MOV": 40, "JUMP": 50, "THROW": 60, "RANGE": 75
-    },
-    "Puppetry": {
-        "HP": 30, "MP": 85, "STR": 25, "DEF": 30,
-        "INT": 70, "RES": 40, "AGI": 80, "CRIT": 75,
-        "MOV": 70, "JUMP": 40, "THROW": 35, "RANGE": 20
-    },
-    "Necromancy": {
-        "HP": 70, "MP": 15, "STR": 75, "DEF": 70,
-        "INT": 30, "RES": 60, "AGI": 20, "CRIT": 25,
-        "MOV": 30, "JUMP": 60, "THROW": 65, "RANGE": 80
-    },
-    "Heaven": {
-        "HP": 100, "MP": 90, "STR": 90, "DEF": 80,
-        "INT": 90, "RES": 80, "AGI": 90, "CRIT": 80,
-        "MOV": 80, "JUMP": 70, "THROW": 70, "RANGE": 80
-    }
+COLOR_VALUES = {
+    "Rubin": 1,
+    "Carnelian": 2,
+    "Bernstein": 3,
+    "Citrin":4,
+    "Peridot": 5,
+    "Smaragd": 6,
+    "Aquamarin": 7,
+    "Saphir": 8,
+    "Amethyst": 9,
+    "Rhodolith": 10,
+    "Selenit": 13
 }
 
-tab_form = tk.Frame(notebook, bg=theme["bg"])
-notebook.add(tab_form, text="Formel‑Rechner")
-
-frame_form = tk.Frame(tab_form, bg=theme["bg"])
-frame_form.pack(pady=10)
-
-# Name
-tk.Label(frame_form, text="Name:", bg=theme["bg"], fg=theme["text"],
-         font=("Arial", 12, "bold")).grid(row=0, column=0, sticky="w")
-entry_name = tk.Entry(frame_form, width=25, bg=theme["panel"], fg=theme["text"],
-                      font=("Arial", 12))
-entry_name.grid(row=0, column=1, padx=10, pady=5)
-
-# Klasse 1
-tk.Label(frame_form, text="Klasse:", bg=theme["bg"], fg=theme["text"],
-         font=("Arial", 12, "bold")).grid(row=1, column=0, sticky="w")
-combo_class = ttk.Combobox(frame_form, values=list(CLASS_STATS.keys()),
-                           state="readonly", width=22)
-combo_class.grid(row=1, column=1, padx=10, pady=5)
-
-# Optionale Klasse 2 (Hybrid)
-tk.Label(frame_form, text="Zweite Klasse (optional):", bg=theme["bg"], fg=theme["text"],
-         font=("Arial", 12, "bold")).grid(row=2, column=0, sticky="w")
-combo_class2 = ttk.Combobox(frame_form, values=["(Keine)"] + list(CLASS_STATS.keys()),
-                            state="readonly", width=22)
-combo_class2.set("(Keine)")
-combo_class2.grid(row=2, column=1, padx=10, pady=5)
-
-# Farbe (c)
-tk.Label(frame_form, text="Farbe (c):", bg=theme["bg"], fg=theme["text"],
-         font=("Arial", 12, "bold")).grid(row=3, column=0, sticky="w")
-combo_c = ttk.Combobox(frame_form, values=list(COLOR_VALUES.keys()),
-                       state="readonly", width=22)
-combo_c.grid(row=3, column=1, padx=10, pady=5)
-
-# Reinheit (p)
-tk.Label(frame_form, text="Reinheit (p):", bg=theme["bg"], fg=theme["text"],
-         font=("Arial", 12, "bold")).grid(row=4, column=0, sticky="w")
-combo_p = ttk.Combobox(frame_form, values=[50, 60, 70, 80, 90, 100],
-                       state="readonly", width=22)
-combo_p.grid(row=4, column=1, padx=10, pady=5)
-
-# t-Wert
-tk.Label(frame_form, text="t‑Wert:", bg=theme["bg"], fg=theme["text"],
-         font=("Arial", 12, "bold")).grid(row=5, column=0, sticky="w")
-combo_t = ttk.Combobox(frame_form, values=list(range(1, 14)),
-                       state="readonly", width=22)
-combo_t.grid(row=5, column=1, padx=10, pady=5)
-
-# l-Wert
-tk.Label(frame_form, text="l‑Wert:", bg=theme["bg"], fg=theme["text"],
-         font=("Arial", 12, "bold")).grid(row=6, column=0, sticky="w")
-combo_l = ttk.Combobox(frame_form, values=list(range(0, 6)),
-                       state="readonly", width=22)
-combo_l.grid(row=6, column=1, padx=10, pady=5)
-
-# Multiplikator
-mult_var = tk.IntVar()
-tk.Checkbutton(frame_form, text="×2 Multiplikator", variable=mult_var,
-               bg=theme["bg"], fg=theme["text"], selectcolor=theme["panel"],
-               font=("Arial", 12, "bold")).grid(row=7, column=0, columnspan=2, pady=10)
-
-# Ergebnisanzeige
-result_label = tk.Label(tab_form, text="Powerlevel: -",
-                        bg=theme["bg"], fg=theme["text"],
-                        font=("Arial", 18, "bold"))
-result_label.pack(pady=10)
-
-# Ausgabe‑Box
-stats_output = tk.Text(tab_form, height=22, width=80,
-                       bg=theme["panel"], fg=theme["text"],
-                       font=("Consolas", 11))
-stats_output.pack(pady=10)
-
-
-# ---------------------------------------------------------
-# Hybrid‑Berechnung
-# ---------------------------------------------------------
-
-def compute_hybrid_stats(cls1, cls2):
-    stats1 = CLASS_STATS[cls1]
-    stats2 = CLASS_STATS[cls2]
-
-    hybrid = {}
-
-    for stat in stats1:
-        avg = (stats1[stat] + stats2[stat]) / 2
-        boosted = avg * 1.2
-        hybrid[stat] = round(boosted)
-
-    return hybrid
-
-
-# ---------------------------------------------------------
-# Berechnung
-# ---------------------------------------------------------
-
-def on_calculate():
-    try:
-        name = entry_name.get()
-        cls = combo_class.get()
-        cls2 = combo_class2.get()
-        c_name = combo_c.get()
-        p = int(combo_p.get())
-        t = int(combo_t.get())
-        l = int(combo_l.get())
-        multiplier = mult_var.get() == 1
-
-        # Powerlevel
-        base_value = calculate_formula(c_name, p, t, l, multiplier)
-        base_value = math.ceil(base_value)
-
-        result_label.config(text=f"Powerlevel: {base_value}")
-
-        # Normale Klasse
-        stats = CLASS_STATS[cls]
-
-        # Hybrid‑Modus aktiv?
-        hybrid_mode = cls2 != "(Keine)"
-
-        if hybrid_mode:
-            stats = compute_hybrid_stats(cls, cls2)
-
-        stats_output.delete("1.0", tk.END)
-
-        # Kopfbereich
-        stats_output.insert(tk.END, f"Name: {name}\n")
-        stats_output.insert(tk.END, f"Klasse: {cls}\n")
-
-        if hybrid_mode:
-            stats_output.insert(tk.END, f"Hybrid mit: {cls2}\n")
-
-        stats_output.insert(tk.END, f"Powerlevel: {base_value}\n\n")
-
-        # Hauptstats
-        stats_output.insert(tk.END, "=== Stats ===\n")
-        total_sum = 0
-
-        for stat in stats:
-            percent = stats[stat]
-
-            # Finaler Statwert ohne Boost
-            final_value = base_value * (percent / 100)
-
-            # Hybrid‑Boost erst NACH der Stat‑Berechnung
-            if hybrid_mode:
-                final_value *= 1.2
-
-            final_value = math.ceil(final_value)
-            total_sum += percent
-
-            stats_output.insert(tk.END, f"{stat}: {percent} → {final_value}\n")
-
-        stats_output.insert(tk.END, f"\nSumme der Stat‑Prozente: {total_sum}\n")
-
-
-    except Exception as e:
-        result_label.config(text="Bitte alle Werte auswählen.")
-
+def calculate_formula(c_name, p, t, l, multiplier):
+    c = COLOR_VALUES[c_name]
+    part1 = (math.sqrt(p) * (c ** 2)) / 10
+    part2 = (t * 5 + l + 1) ** 2
+    result = part1 * part2
+    if multiplier:
+        result *= 2
+    return result
 
 # -----------------------------
 # Streamlit Layout
